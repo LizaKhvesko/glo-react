@@ -1,16 +1,8 @@
-var employers = ['АртеМ', 'максим', 'Владимир', 'сергей', 'НикиТа', 'евГений', ' Дарья', ' ', 'виктория ', 'ЕкаТерина', '', ' Андрей ', 'КИРИЛЛ'];
-var nameCourse = 'Базовый React';
-var command = [];
+const employers = ['АртеМ', 'максим', 'Владимир', 'сергей', 'НикиТа', 'евГений', ' Дарья', ' ', 'виктория ', 'ЕкаТерина', '', ' Андрей ', 'КИРИЛЛ'];
+const nameCourse = 'Базовый React';
 
-employers.forEach(employer => {
-	if (employer.length > 0 && employer.trim() != '') {
-		command.push(employer);
-	}
-}) 
-for (let i = 0; i < command.length; i++) {
-	command[i] = command[i].toLowerCase().trim();
-	command[i] = command[i][0].toUpperCase() + command[i].slice(1);
-}
+const command = employers.filter(name => name.trim().length)
+.map(name => name.trim().charAt(0).toUpperCase() + name.trim().substr(1).toLowerCase());
 
 const data = {
 	cash: [3, 8, 3],
@@ -18,20 +10,11 @@ const data = {
 	add: ['styled-components', 'firebase']
 };
 
-function calcCash(own = 0, { cash }) {
-	const everyCash = cash;
-	let total = own;
-	everyCash.forEach(number => {
-		total += number;
-	})
-	return total;
-}
+const calcCash = everyCash => everyCash.reduce((prev, curr) => prev + curr);
 
-const { react: [jsx] } = data;
-const { react } = data;
-const{ add } = data;
+const { cash, react, react: [jsx], add } = data;
 
-const lesson = calcCash(null, data);
+const lesson = calcCash(cash);
 
 class MakeBusiness {
 	constructor(director, teacher = 'Максим') {
